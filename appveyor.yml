@@ -44,7 +44,6 @@ environment:
 install:
   # this installs the appropriate Miniconda (Py2/Py3, 32/64 bit),
   # as well as pip, conda-build, and the anaconda CLI
-  - set ROOT_DIR=%cd%
   - powershell .\\continuous-integration\\appveyor\\install.ps1
   - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
 
@@ -55,7 +54,7 @@ install:
   - echo %COMMIT_MSG% | findstr '[kiwisolver]' & set BUILD_KIWISOLVER=%errorlevel% & cd
   - echo %COMMIT_MSG% | findstr '[enaml]' & set BUILD_ENAML= %errorlevel% & cd
 
-  - mkdir conda-bld-output
+  - mkdir conda-bld-out
   - cd conda-bld-out
   - set CONDA_BLD_PATH=%cd%
   - cd ..
