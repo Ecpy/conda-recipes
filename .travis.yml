@@ -42,7 +42,7 @@ install:
   - conda config --add channels ecpy
 
 script:
-  - source continuous-integration/travis/buid_packages.sh
+  - source continuous-integration/travis/build-packages.sh
 
 after_success:
   - cd conda-bld-out
