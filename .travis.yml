@@ -1,0 +1,75 @@
+language: generic
+
+matrix:
+  include:
+    - os: linux
+      dist: trusty
+      sudo: false
+      env: python=2.7 CONDA_PY=27
+    - os: linux
+      dist: trusty
+      sudo: false
+      env: python=3.4 CONDA_PY=34
+    - os: linux
+      dist: trusty
+      sudo: false
+      env: python=3.5 CONDA_PY=35
+    - os: osx
+      osx_image: xcode7.3
+      env: CONDA_PY=27
+    - os: osx
+      osx_image: xcode7.3
+      env: CONDA_PY=34
+    - os: osx
+      osx_image: xcode7.3
+      env: CONDA_PY=35
+
+before_install:
+  - "export TRAVIS_COMMIT_MSG=\"$(git log --format=%B --no-merges -n 1)\""
+  - echo "$TRAVIS_COMMIT_MSG" | grep '[argh]'; export BUILD_ARGH=$?; true
+  - echo "$TRAVIS_COMMIT_MSG" | grep '[pathtools]'; export BUILD_PATHTOOLS=$?; true
+  - echo "$TRAVIS_COMMIT_MSG" | grep '[watchdog]'; export BUILD_WATCHDOG=$?; true
+  - echo "$TRAVIS_COMMIT_MSG" | grep '[atom]'; export BUILD_ATOM=$?; true
+  - echo "$TRAVIS_COMMIT_MSG" | grep '[kiwisolver]'; export BUILD_KIWISOLVER=$?; true
+  - echo "$TRAVIS_COMMIT_MSG" | grep '[enaml]'; export BUILD_ENAML=$?; true
+
+install:
+  - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
+      source continuous-integration/travis/install_osx.sh
+    else
+      source continuous-integration/travis/install.sh
+    fi
+  - mkdir conda-bld-out
+  - cd conda-bld-out
+  - export CONDA_BLD_PATH=$(pwd)
+  - cd ..
+  - conda config --add channels ecpy
+
+script:
+  - if [$CONDA_PY = 34] && [[ $BUILD_ARGH ]]; then
+      export BUILD_ARGH=conda build conda-recipes/argh --quiet
+      conda index $CONDA_BLD_PATH/$TRAVIS_OS_NAME-64
+    fi
+  - if [$CONDA_PY = 34] && [[ $BUILD_PATHTOOLS ]]; then
+      export BUILD_PATHTOOLS=conda build conda-recipes/pathtools --quiet
+      conda index $CONDA_BLD_PATH/$TRAVIS_OS_NAME-64
+    fi
+  - if [$CONDA_PY = 34] && [[ $BUILD_WATCHDOG ]]; then
+      export BUILD_WATCHDOG=conda build conda-recipes/watchdog --quiet -c file://$CONDA_BLD_PATH
+    fi
+  - if [[ $BUILD_ATOM ]]; then
+      export BUILD_ATOM=conda build conda-recipes/atom --quiet
+      conda index $CONDA_BLD_PATH/$TRAVIS_OS_NAME-64
+    fi
+  - if [[ $BUILD_KIWISOLVER ]]; then
+      export BUILD_KIWISOLVER=conda build conda-recipes/kiwisolver --quiet
+      conda index $CONDA_BLD_PATH/$TRAVIS_OS_NAME-64
+    fi
+  - if [[ $BUILD_ENAML ]]; then
+      export BUILD_ENAML=conda build conda-recipes/enaml --quiet  -c file://$CONDA_BLD_PATH
+    fi
+
+after_success:
+  - cd conda-bld-out
+  # Will uncomment once the build is stable
+  # - anaconda upload -t $ANACONDA_TOKEN upload --force *.tar.bz2
