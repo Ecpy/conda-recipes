@@ -1,0 +1,101 @@
+environment:
+  # See README for information on the token
+  # anaconda_token:
+  #   secure: va2cH3651uru58ThstGxm6R/Rvjw4xC13WnQFQpP0bgc8IjYrbBJWLLMvrCuSgWF
+
+  global:
+    # SDK v7.0 MSVC Express 2008's SetEnv.cmd script will fail if the
+    # /E:ON and /V:ON options are not enabled in the batch script intepreter
+    # See: http://stackoverflow.com/a/13751649/163740
+    CMD_IN_ENV: "cmd /E:ON /V:ON /C .\\continuous-integration\\appveyor\\run_with_env.cmd"
+
+
+  matrix:
+    - PYTHON: "C:\\Python27_32"
+      PYTHON_VERSION: "2.7"
+      PYTHON_ARCH: "32"
+      CONDA_PY: "27"
+
+    - PYTHON: "C:\\Python27_64"
+      PYTHON_VERSION: "2.7"
+      PYTHON_ARCH: "64"
+      CONDA_PY: "27"
+
+    - PYTHON: "C:\\Python34_32"
+      PYTHON_VERSION: "3.4"
+      PYTHON_ARCH: "32"
+      CONDA_PY: "34"
+
+    - PYTHON: "C:\\Python34_64"
+      PYTHON_VERSION: "3.4"
+      PYTHON_ARCH: "64"
+      CONDA_PY: "34"
+
+    - PYTHON: "C:\\Python35_32"
+      PYTHON_VERSION: "3.5"
+      PYTHON_ARCH: "32"
+      CONDA_PY: "34"
+
+    - PYTHON: "C:\\Python35_64"
+      PYTHON_VERSION: "3.5"
+      PYTHON_ARCH: "64"
+      CONDA_PY: "34"
+
+install:
+  # this installs the appropriate Miniconda (Py2/Py3, 32/64 bit),
+  # as well as pip, conda-build, and the anaconda CLI
+  - powershell .\\continuous-integration\\appveyor\\install.ps1
+  - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
+
+  # Determine which packages to build
+  - SET COMMIT_MSG=%APPVEYOR_REPO_COMMIT_MESSAGE%\n%APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED%
+  - python continuous-integration\\analyse_commit_message.py atom %COMMIT_MSG%
+  - SET BUILD_ATOM=%errorlevel%
+  - python continuous-integration\\analyse_commit_message.py kiwisolver %COMMIT_MSG%
+  - SET BUILD_KIWISOLVER=%errorlevel%
+  - python continuous-integration\\analyse_commit_message.py enaml %COMMIT_MSG%
+  - SET BUILD_ENAML=%errorlevel%
+
+  - mkdir conda-bld-output
+  - cd conda-bld-out
+  - set CONDA_BLD_PATH=%cd%
+  - cd ..
+  - conda config --add channels ecpy
+
+build: false
+
+test_script:
+  # Build and test the package. This appears(?) to sporadically fail due to a
+  # bug in conda-build on 32 bit python.
+  # https://github.com/conda/conda-build/issues/152
+  #
+  # Once built the conda packages are moved into the current directory, to
+  # register them as "artifacts" for Appveyor. cmd.exe does't have good
+  # globbing, so we'll use a simple python script.
+
+  - if %BUILD_ATOM%==0 (
+    "%CMD_IN_ENV% conda build conda-recipes\atom --quiet"
+    conda index %CONDA_BLD_PATH%\\win-%PYTHON_ARCH%
+    python continuous-integration\\move-conda-packages.py conda-recipes\atom
+    )
+  - if %BUILD_KIWISOLVER%==0(
+    "%CMD_IN_ENV% conda build conda-recipes\kiwisolver --quiet"
+    conda index %CONDA_BLD_PATH%\\win-%PYTHON_ARCH%
+    python continuous-integration\\move-conda-packages.py conda-recipes\kiwisolver
+    )
+  - if %BUILD_ENAML%==0(
+    "%CMD_IN_ENV% conda build conda-recipes\enaml --quiet -c file://%CONDA_BLD_PATH%"
+    python continuous-integration\\move-conda-packages.py conda-recipes\enaml
+    )
+
+artifacts:
+  # Archive the generated conda package in the ci.appveyor.com build report.
+  - path: '*.tar.bz2'
+
+on_success:
+  # Upload built binaries to anaconda.org. The globbing and handling of the
+  # exit-status code is tricky in cmd.exe or powershell, so we're just using
+  # a python script.
+  # - if defined %ANACONDA_TOKEN% (
+  #   python continuous-integration\anaconda-push.py
+  #   )
