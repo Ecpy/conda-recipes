@@ -47,15 +47,15 @@ install:
   - set ROOT_DIR=%cd%
   - powershell .\\continuous-integration\\appveyor\\install.ps1
   - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
-  - cd %ROOT_DIR%
+  - echo %cd%
 
   # Determine which packages to build
   - SET COMMIT_MSG=%APPVEYOR_REPO_COMMIT_MESSAGE%\n%APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED%
-  - python .\\continuous-integration\\analyse_commit_message.py atom %COMMIT_MSG%
+  - python continuous-integration\analyse_commit_message.py atom %COMMIT_MSG%
   - SET BUILD_ATOM=%errorlevel%
-  - python .\\continuous-integration\\analyse_commit_message.py kiwisolver %COMMIT_MSG%
+  - python continuous-integration\analyse_commit_message.py kiwisolver %COMMIT_MSG%
   - SET BUILD_KIWISOLVER=%errorlevel%
-  - python .\\continuous-integration\\analyse_commit_message.py enaml %COMMIT_MSG%
+  - python continuous-integration\analyse_commit_message.py enaml %COMMIT_MSG%
   - SET BUILD_ENAML=%errorlevel%
 
   - mkdir conda-bld-output
@@ -77,17 +77,17 @@ test_script:
 
   - if %BUILD_ATOM%==0 (
     "%CMD_IN_ENV% conda build .\\conda-recipes\\atom --quiet"
-    conda index %CONDA_BLD_PATH%\\win-%PYTHON_ARCH%
-    python .\\continuous-integration\\move-conda-packages.py conda-recipes\atom
+    conda index %CONDA_BLD_PATH%\win-%PYTHON_ARCH%
+    python continuous-integration\move-conda-packages.py conda-recipes\atom
     )
   - if %BUILD_KIWISOLVER%==0(
     "%CMD_IN_ENV% conda build .\\conda-recipes\\kiwisolver --quiet"
-    conda index %CONDA_BLD_PATH%\\win-%PYTHON_ARCH%
-    python .\\continuous-integration\\move-conda-packages.py conda-recipes\kiwisolver
+    conda index %CONDA_BLD_PATH%\win-%PYTHON_ARCH%
+    python continuous-integration\move-conda-packages.py conda-recipes\kiwisolver
     )
   - if %BUILD_ENAML%==0(
     "%CMD_IN_ENV% conda build .\\conda-recipes\\enaml --quiet -c file://%CONDA_BLD_PATH%"
-    python .\\continuous-integration\\move-conda-packages.py conda-recipes\enaml
+    python continuous-integration\move-conda-packages.py conda-recipes\enaml
     )
 
 artifacts:
