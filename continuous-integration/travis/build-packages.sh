@@ -14,6 +14,9 @@ fi
 if [ $BUILD_WATCHDOG ]; then
   conda build conda-recipes/watchdog --quiet -c file://$CONDA_BLD_PATH
   export BUILD_WATCHDOG=$?
+  conda index $CONDA_BLD_PATH/$TRAVIS_OS_NAME-64
+  PACK = conda build conda-recipes/watchdog --output
+  conda convert PACK -p win-32 win-64 --quiet
 fi
 
 if [ $BUILD_ATOM ]; then
