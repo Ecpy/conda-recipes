@@ -34,12 +34,12 @@ environment:
     - PYTHON: "C:\\Python35_32"
       PYTHON_VERSION: "3.5"
       PYTHON_ARCH: "32"
-      CONDA_PY: "34"
+      CONDA_PY: "35"
 
     - PYTHON: "C:\\Python35_64"
       PYTHON_VERSION: "3.5"
       PYTHON_ARCH: "64"
-      CONDA_PY: "34"
+      CONDA_PY: "35"
 
 install:
   # this installs the appropriate Miniconda (Py2/Py3, 32/64 bit),
@@ -47,15 +47,14 @@ install:
   - set ROOT_DIR=%cd%
   - powershell .\\continuous-integration\\appveyor\\install.ps1
   - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
-  - echo %cd%
 
   # Determine which packages to build
   - SET COMMIT_MSG=%APPVEYOR_REPO_COMMIT_MESSAGE%\n%APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED%
-  - python continuous-integration\analyse_commit_message.py atom %COMMIT_MSG%
+  - python continuous-integration\analyse-commit-message.py atom %COMMIT_MSG%
   - SET BUILD_ATOM=%errorlevel%
-  - python continuous-integration\analyse_commit_message.py kiwisolver %COMMIT_MSG%
+  - python continuous-integration\analyse-commit-message.py kiwisolver %COMMIT_MSG%
   - SET BUILD_KIWISOLVER=%errorlevel%
-  - python continuous-integration\analyse_commit_message.py enaml %COMMIT_MSG%
+  - python continuous-integration\analyse-commit-message.py enaml %COMMIT_MSG%
   - SET BUILD_ENAML=%errorlevel%
 
   - mkdir conda-bld-output
