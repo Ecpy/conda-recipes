@@ -51,9 +51,9 @@ install:
   # Determine which packages to build
   # Use cd as true on bash to set the status to 0
   - SET COMMIT_MSG=%APPVEYOR_REPO_COMMIT_MESSAGE%\n%APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED%
-  - echo %COMMIT_MSG% | findstr '[atom]'; set BUILD_ATOM=$?; cd
-  - echo %COMMIT_MSG% | findstr '[kiwisolver]'; set BUILD_KIWISOLVER=$?; cd
-  - echo %COMMIT_MSG% | findstr '[enaml]'; set BUILD_ENAML=$?; cd
+  - echo %COMMIT_MSG% | findstr '[atom]' & set BUILD_ATOM=%errorlevel% & cd
+  - echo %COMMIT_MSG% | findstr '[kiwisolver]' & set BUILD_KIWISOLVER=%errorlevel% & cd
+  - echo %COMMIT_MSG% | findstr '[enaml]' & set BUILD_ENAML= %errorlevel% & cd
 
   - mkdir conda-bld-output
   - cd conda-bld-out
