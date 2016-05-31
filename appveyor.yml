@@ -49,13 +49,11 @@ install:
   - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
 
   # Determine which packages to build
+  # Use cd as true on bash to set the status to 0
   - SET COMMIT_MSG=%APPVEYOR_REPO_COMMIT_MESSAGE%\n%APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED%
-  - python continuous-integration\analyse-commit-message.py atom %COMMIT_MSG%
-  - SET BUILD_ATOM=%errorlevel%
-  - python continuous-integration\analyse-commit-message.py kiwisolver %COMMIT_MSG%
-  - SET BUILD_KIWISOLVER=%errorlevel%
-  - python continuous-integration\analyse-commit-message.py enaml %COMMIT_MSG%
-  - SET BUILD_ENAML=%errorlevel%
+  - echo %COMMIT_MSG% | findstr '[atom]'; set BUILD_ATOM=$?; cd
+  - echo %COMMIT_MSG% | findstr '[kiwisolver]'; set BUILD_KIWISOLVER=$?; cd
+  - echo %COMMIT_MSG% | findstr '[enaml]'; set BUILD_ENAML=$?; cd
 
   - mkdir conda-bld-output
   - cd conda-bld-out
