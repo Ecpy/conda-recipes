@@ -1,17 +1,17 @@
 set -e
-if [ $CONDA_PY = 34 ] && [ $BUILD_ARGH ]; then
+if [ $BUILD_ARGH ]; then
   conda build conda-recipes/argh --quiet
   export BUILD_ARGH=$?
   conda index $CONDA_BLD_PATH/$TRAVIS_OS_NAME-64
 fi
 
-if [ $CONDA_PY = 34 ] && [ $BUILD_PATHTOOLS ]; then
+if [ $BUILD_PATHTOOLS ]; then
   conda build conda-recipes/pathtools --quiet
   export BUILD_PATHTOOLS=$?
   conda index $CONDA_BLD_PATH/$TRAVIS_OS_NAME-64
 fi
 
-if [ $CONDA_PY = 34 ] && [ $BUILD_WATCHDOG ]; then
+if [ $BUILD_WATCHDOG ]; then
   conda build conda-recipes/watchdog --quiet -c file://$CONDA_BLD_PATH
   export BUILD_WATCHDOG=$?
 fi
