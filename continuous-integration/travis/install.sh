@@ -1,5 +1,9 @@
 MINICONDA_URL="http://repo.continuum.io/miniconda"
-MINICONDA_FILE="Miniconda-latest-Linux-x86_64.sh"
+if [ $TRAVIS_OS_NAME == 'osx' ]; then
+  MINICONDA_FILE="Miniconda-latest-MacOSX-x86_64.sh"
+else
+  MINICONDA_FILE="Miniconda-latest-Linux-x86_64.sh"
+fi
 wget "${MINICONDA_URL}/${MINICONDA_FILE}"
 bash $MINICONDA_FILE -b
 

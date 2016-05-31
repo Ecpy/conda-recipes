@@ -34,11 +34,7 @@ before_install:
   - echo "$TRAVIS_COMMIT_MSG" | grep '[enaml]'; export BUILD_ENAML=$?; true
 
 install:
-  - if [ $TRAVIS_OS_NAME == 'osx' ]; then
-      source continuous-integration/travis/install_osx.sh
-    else
-      source continuous-integration/travis/install.sh
-    fi
+  - source continuous-integration/travis/install.sh
   - mkdir conda-bld-out
   - cd conda-bld-out
   - export CONDA_BLD_PATH=$(pwd)
@@ -46,28 +42,7 @@ install:
   - conda config --add channels ecpy
 
 script:
-  - if [ $CONDA_PY = 34 ] && [ $BUILD_ARGH ]; then
-      export BUILD_ARGH=conda build conda-recipes/argh --quiet
-      conda index $CONDA_BLD_PATH/$TRAVIS_OS_NAME-64
-    fi
-  - if [ $CONDA_PY = 34 ] && [ $BUILD_PATHTOOLS ]; then
-      export BUILD_PATHTOOLS=conda build conda-recipes/pathtools --quiet
-      conda index $CONDA_BLD_PATH/$TRAVIS_OS_NAME-64
-    fi
-  - if [ $CONDA_PY = 34 ] && [ $BUILD_WATCHDOG ]; then
-      export BUILD_WATCHDOG=conda build conda-recipes/watchdog --quiet -c file://$CONDA_BLD_PATH
-    fi
-  - if [ $BUILD_ATOM ]; then
-      export BUILD_ATOM=conda build conda-recipes/atom --quiet
-      conda index $CONDA_BLD_PATH/$TRAVIS_OS_NAME-64
-    fi
-  - if [ $BUILD_KIWISOLVER ]; then
-      export BUILD_KIWISOLVER=conda build conda-recipes/kiwisolver --quiet
-      conda index $CONDA_BLD_PATH/$TRAVIS_OS_NAME-64
-    fi
-  - if [ $BUILD_ENAML ]; then
-      export BUILD_ENAML=conda build conda-recipes/enaml --quiet  -c file://$CONDA_BLD_PATH
-    fi
+  - source continuous-integration/travis/buid_packages.sh
 
 after_success:
   - cd conda-bld-out
