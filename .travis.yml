@@ -30,12 +30,16 @@ matrix:
 
 before_install:
   - export TRAVIS_COMMIT_MSG="$(git log --format=%B --no-merges -n 1)"
+  - echo $TRAVIS_COMMIT_MSG
   - echo "$TRAVIS_COMMIT_MSG" | grep '\[argh\]'; export BUILD_ARGH=$?; true
   - echo "$TRAVIS_COMMIT_MSG" | grep '\[pathtools\]'; export BUILD_PATHTOOLS=$?; true
   - echo "$TRAVIS_COMMIT_MSG" | grep '\[watchdog\]'; export BUILD_WATCHDOG=$?; true
   - echo "$TRAVIS_COMMIT_MSG" | grep '\[atom\]'; export BUILD_ATOM=$?; true
   - echo "$TRAVIS_COMMIT_MSG" | grep '\[kiwisolver\]'; export BUILD_KIWISOLVER=$?; true
   - echo "$TRAVIS_COMMIT_MSG" | grep '\[enaml\]'; export BUILD_ENAML=$?; true
+  - echo "argh" $BUILD_ARGH "pathtools" $BUILD_PATHTOOLS "watchdog" $BUILD_WATCHDOG
+  - echo "atom" $BUILD_ATOM "kiwi" $BUILD_KIWISOLVER "enaml" $BUILD_ENAML
+
 
 install:
   - source continuous-integration/travis/install.sh

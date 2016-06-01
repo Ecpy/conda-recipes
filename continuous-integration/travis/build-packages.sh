@@ -1,17 +1,17 @@
 set -e
-if [ $BUILD_ARGH ]; then
+if [ $BUILD_ARGH==0 ]; then
   conda build conda-recipes/argh --quiet
   export BUILD_ARGH=$?
   conda index $CONDA_BLD_PATH/$TRAVIS_OS_NAME-64
 fi
 
-if [ $BUILD_PATHTOOLS ]; then
+if [ $BUILD_PATHTOOLS==0 ]; then
   conda build conda-recipes/pathtools --quiet
   export BUILD_PATHTOOLS=$?
   conda index $CONDA_BLD_PATH/$TRAVIS_OS_NAME-64
 fi
 
-if [ $BUILD_WATCHDOG ]; then
+if [ $BUILD_WATCHDOG==0 ]; then
   conda build conda-recipes/watchdog --quiet -c file://$CONDA_BLD_PATH
   export BUILD_WATCHDOG=$?
   if [ $TRAVIS_OS_NAME=="linux" ]; then
@@ -21,18 +21,18 @@ if [ $BUILD_WATCHDOG ]; then
   fi
 fi
 
-if [ $BUILD_ATOM ]; then
+if [ $BUILD_ATOM==0 ]; then
   conda build conda-recipes/atom --quiet
   export BUILD_ATOM=$?
   conda index $CONDA_BLD_PATH/$TRAVIS_OS_NAME-64
 fi
 
-if [ $BUILD_KIWISOLVER ]; then
+if [ $BUILD_KIWISOLVER==0 ]; then
   conda build conda-recipes/kiwisolver --quiet
   export BUILD_KIWISOLVER=$?
   conda index $CONDA_BLD_PATH/$TRAVIS_OS_NAME-64
 fi
-if [ $BUILD_ENAML ]; then
+if [ $BUILD_ENAML==0 ]; then
   conda build conda-recipes/enaml --quiet  -c file://$CONDA_BLD_PATH
   export BUILD_ENAML=$?
 fi

@@ -11,7 +11,6 @@ def remove_readonly(func, path, excinfo):
 
 
 def main():
-    print(sys.executable)
     if not os.path.isdir(sys.argv[1]):
         return
     try:

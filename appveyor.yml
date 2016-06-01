@@ -52,9 +52,11 @@ install:
   # Determine which packages to build
   # Use cd as true on bash to set the status to 0
   - SET COMMIT_MSG=%APPVEYOR_REPO_COMMIT_MESSAGE%\n%APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED%
+  - echo %COMMIT_MSG%
   - echo %COMMIT_MSG% | findstr '\[atom\]' & set BUILD_ATOM=%errorlevel% & cd
   - echo %COMMIT_MSG% | findstr '\[kiwisolver\]' & set BUILD_KIWISOLVER=%errorlevel% & cd
   - echo %COMMIT_MSG% | findstr '\[enaml\]' & set BUILD_ENAML= %errorlevel% & cd
+  - echo "atom" %BUILD_ATOM% "kiwi" %BUILD_KIWISOLVER% "enaml" %BUILD_ENAML%
 
   - mkdir conda-bld-out
   - cd conda-bld-out
@@ -66,9 +68,9 @@ build: false
 
 test_script:
   - "%CMD_IN_ENV% .\\continuous-integration\\appveyor\\build-atom.bat"
-  - python .\\continuous-integration\\appveyor\\rm_rf.py .\\%CONDA_BLD_PATH%\work
+  - python .\\continuous-integration\\appveyor\\rm_rf.py .\\%CONDA_BLD_PATH%\\work
   - "%CMD_IN_ENV% .\\continuous-integration\\appveyor\\build-kiwisolver.bat"
-  - python .\\continuous-integration\\appveyor\\rm_rf.py .\\%CONDA_BLD_PATH%\work
+  - python .\\continuous-integration\\appveyor\\rm_rf.py .\\%CONDA_BLD_PATH%\\work
   - "%CMD_IN_ENV% .\\continuous-integration\\appveyor\\build-enaml.bat"
 
 artifacts:
@@ -81,5 +83,5 @@ on_success:
   # a python script.
   - cd %CONDA_BLD_PATH%
   - if defined ANACONDA_TOKEN (
-      python ..\continuous-integration\anaconda-push.py
+      python ..\\continuous-integration\\anaconda-push.py
     )
