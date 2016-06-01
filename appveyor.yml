@@ -65,28 +65,7 @@ install:
 build: false
 
 test_script:
-  # Build and test the package. This appears(?) to sporadically fail due to a
-  # bug in conda-build on 32 bit python.
-  # https://github.com/conda/conda-build/issues/152
-  #
-  # Once built the conda packages are moved into the current directory, to
-  # register them as "artifacts" for Appveyor. cmd.exe does't have good
-  # globbing, so we'll use a simple python script.
-
-  - if %BUILD_ATOM%==0 (
-    '%CMD_IN_ENV% conda build .\\conda-recipes\\atom --quiet'
-    'conda index %CONDA_BLD_PATH%\win-%PYTHON_ARCH%'
-    'python continuous-integration\move-conda-packages.py conda-recipes\atom'
-    )
-  - if %BUILD_KIWISOLVER%==0(
-    '%CMD_IN_ENV% conda build .\\conda-recipes\\kiwisolver --quiet'
-    'conda index %CONDA_BLD_PATH%\win-%PYTHON_ARCH%'
-    'python continuous-integration\move-conda-packages.py conda-recipes\kiwisolver'
-    )
-  - if %BUILD_ENAML%==0(
-    '%CMD_IN_ENV% conda build .\\conda-recipes\\enaml --quiet -c file://%CONDA_BLD_PATH%'
-    'python continuous-integration\move-conda-packages.py conda-recipes\enaml'
-    )
+  - cmd .\\continuous-integration\\appveyor\\build-packages.bat
 
 artifacts:
   # Archive the generated conda package in the ci.appveyor.com build report.
@@ -96,6 +75,6 @@ on_success:
   # Upload built binaries to anaconda.org. The globbing and handling of the
   # exit-status code is tricky in cmd.exe or powershell, so we're just using
   # a python script.
-  # - if defined %ANACONDA_TOKEN% (
-  #   python continuous-integration\anaconda-push.py
-  #   )
+   - if defined ANACONDA_TOKEN (
+     python continuous-integration\anaconda-push.py
+     )
