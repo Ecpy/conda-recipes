@@ -1,6 +1,6 @@
 set -e
 MINICONDA_URL="http://repo.continuum.io/miniconda"
-if [ $TRAVIS_OS_NAME == 'osx' ]; then
+if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
   MINICONDA_FILE="Miniconda-latest-MacOSX-x86_64.sh"
 else
   MINICONDA_FILE="Miniconda-latest-Linux-x86_64.sh"
