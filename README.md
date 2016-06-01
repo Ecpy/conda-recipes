@@ -8,6 +8,10 @@ Each time a commit is pushed to this repo, the commit message is analysed and
 all packages mentionned between [] in the commit message are rebuilt and
 uploaded to the ecpy anaconda channel.
 
+Appveyor build can be skipped using [skip appveyor]
+Travis build can be 'skipped' (no work done) using [skip travis]
+Skip both using [ci skip]
+
 Notes
 -----
 Universal packages are built only on Travis. The universal packages are :
