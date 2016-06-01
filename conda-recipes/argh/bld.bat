@@ -1,4 +1,4 @@
-"%PYTHON%" setup.py install --single-version-externally-managed --record=/dev/null
+"%PYTHON%" setup.py install --single-version-externally-managed --record=nul
 if errorlevel 1 exit 1
 
 :: Add more build steps here, if they are necessary.
