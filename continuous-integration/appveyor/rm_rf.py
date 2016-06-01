@@ -4,12 +4,16 @@ import sys
 import stat
 import shutil
 
+
 def remove_readonly(func, path, excinfo):
     os.chmod(path, stat.S_IWRITE)
     func(path)
 
+
 def main():
     print(sys.executable)
+    if not os.path.isdir(sys.argv[1]):
+        return
     try:
         shutil.rmtree(sys.argv[1], onerror=remove_readonly)
     except Exception as e:
