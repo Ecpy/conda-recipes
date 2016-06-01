@@ -4,5 +4,5 @@ REM https://github.com/conda/conda-build/issues/152
 
 if %BUILD_KIWISOLVER% == 0 (
   conda build .\\conda-recipes\\kiwisolver --quiet
-  conda index %CONDA_BLD_PATH%\win-%PYTHON_ARCH%
+  if %errorlevel% == 0 (conda index %CONDA_BLD_PATH%\win-%PYTHON_ARCH%)
 )
