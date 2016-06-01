@@ -53,9 +53,9 @@ install:
   # Use cd as true on bash to set the status to 0
   - SET COMMIT_MSG=%APPVEYOR_REPO_COMMIT_MESSAGE%\n%APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED%
   - echo %COMMIT_MSG%
-  - echo %COMMIT_MSG% | findstr '\[atom\]' & set BUILD_ATOM=%errorlevel% & cd
-  - echo %COMMIT_MSG% | findstr '\[kiwisolver\]' & set BUILD_KIWISOLVER=%errorlevel% & cd
-  - echo %COMMIT_MSG% | findstr '\[enaml\]' & set BUILD_ENAML= %errorlevel% & cd
+  - echo.%COMMIT_MSG%|findstr /C:"\[atom\]" >nul 2>&1 && set BUILD_ATOM=0 || set BUILD_ATOM=1
+  - echo.%COMMIT_MSG%|findstr /C:"\[kiwisolver\]" >nul 2>&1 && set BUILD_KIWISOLVER=0 || set BUILD_KIWISOLVER=1
+  - echo.%COMMIT_MSG%|findstr /C:"\[enaml\]" >nul 2>&1 && set BUILD_ENAML=0 || set BUILD_ENAML=1
   - echo "atom" %BUILD_ATOM% "kiwi" %BUILD_KIWISOLVER% "enaml" %BUILD_ENAML%
 
   - mkdir conda-bld-out
