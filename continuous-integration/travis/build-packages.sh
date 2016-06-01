@@ -15,9 +15,9 @@ if [ $BUILD_WATCHDOG ]; then
   conda build conda-recipes/watchdog --quiet -c file://$CONDA_BLD_PATH
   export BUILD_WATCHDOG=$?
   if [ $TRAVIS_OS_NAME=="linux" ]; then
-    PACK=&(conda build conda-recipes/watchdog --output)
-    conda convert $PACK -p win-32 --quiet -o $CONDA_BLD_PATH
-    conda convert $PACK -p win-64 --quiet -o $CONDA_BLD_PATH
+    export PACK="$(conda build conda-recipes/watchdog --output)"
+    conda convert $PACK -p 'win-32' --quiet -o $CONDA_BLD_PATH
+    conda convert $PACK -p 'win-64' --quiet -o $CONDA_BLD_PATH
   fi
 fi
 
