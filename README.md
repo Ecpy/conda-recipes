@@ -10,12 +10,25 @@ uploaded to the ecpy anaconda channel.
 
 Notes
 -----
-Universal packages are built only on Travis under python 3.4. The universal
-packages are :
+Universal packages are built only on Travis. The universal packages are :
 
 - argh
 - pathtools
-- watchdog
+
+Watchdog has compiled extension only on mac so we do not build under windows
+
+
+Updating the credentials
+------------------------
+
+The api token for Anaconda.org need the following authorizations :
+- API operations
+- API read operations
+- API write operations
+- Conda packages operation
+
+The token needs to be properly encrypted using either the travis cmd line tool
+or the online appveyor tool and updated in the matching configuration file.
 
 
 Acknowledgements

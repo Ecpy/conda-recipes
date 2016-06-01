@@ -2,7 +2,7 @@ language: generic
 
 env:
   global:
-    secure: "AyaI9ymEvpdxeK6qaD/pHaJ93ITmA0PkoA7u13BfjwZhxyVLSLaOKQXlND+SWv973CzJ/40kgreXnexe/F5E13EvCtWf/j+kZL5FrAT/Lntt41vTHEJJ+IbVptD0S9ymwW5yyfrLlISj98pmQtjI5a8e/QHHLcILswLciGYpVHhVeaXEGmhaoy2qbrom3d+i9y1FyxUYMblPWKBUN2KE6ufwFq4q3PO6twR8Rda5xWelUfkWRVMXXCYuPJMzUwPJi6jsrU21D9HVgu0NZW1/ISbAM3lYqfXVPWxNS1z3dxRT3rB1rcW3bB1DPQTpHdXCf8B6FTQn91as2JdoQuC2VXrJ4Ph230r8C39gfdNM3QyZZdat8wMDtaelV5387IRIpxXQpNfFA7S/WN5BRpSTmO4lBSECgzQpZJ+4oOC12kn4GyUjkTRg4wXbfH1/eboahEJ5uni/VKKePoHkh+f8e2CJUgJ2BGa/U/rEPNweBefYVxVLvgCvJLfbIz1Bl7A2VWPyP9S0i29zaZyEvyY+qrdrDfoGmm7/lP1aUd0ezQUEuaDW2Ksy1lpTVmBxYcfzLB29SeC2Mg5darClNTWjB8/vJ3/g5GItzwZhoqnHPF+H1NE956x9EYeNsSu2jtmTbGlHiEeaS0EiaGgCQDIvCQxlnXFK0jy359k35sbCqik="
+    secure: "eEqhuLsrcqj3A0ydCpJz4fH1fhwLkuTNmGWUlSTfkba2YTmZSeCJ4q006vKmFo3dUMTyI2m59YnSU7qvjov3/kX2T/Ys86sH4q/DRV19smNcbQwNm2YGbE9aKTfKSthoAJ/+hsB3mkio6oZRnAy+nxs8IA35XysqlqtIH6yLNkwBVNbL0kcFbJQ9WiZn0g5vja1O9KT81jOaI1mBwSAlx+50t9StUwUhOKk7paRJs2TF8KkcpHZGozKi4/+jurvuLYyJoZ2wGLYRYuHYu6Cm1pc5hpEAMFk8TjrqGMdJ0oKkDH6k/rAgB6AiBGeNb3FnvGi8U15t/X4yvtLCY7APezWbxT9mlta8KPNPg4PLyl34wUtTZSwj6bKuw4lYt8P/ItKcm0amcT3+LxVKU5zL4KBCtNF+g/RIop+6j+f6HUF4FGdpzS6ZE5GZrS9SQ00XC4THYZAUGsBbylTWoTnlFGB9ZFrgyTEdAlDkJOHCQMPXp1/TIocpuNbdwbqDI4BXn3LO4RmOWdtNbcf4AUZNqUG7IlRvc8Gimu+j8bpMVjGdJsC+5EL4uawkWGoMSmh0Pfwbei0OvNz9CbZaM59PonAxIPuXvxKIIBo5I2tu7m6f31UGWRg61VSRmWR+pYZiJmpIKsxXTkLUllUPOi55aE+JKwt8f1uCAg5j+5qCd2k="
 
 matrix:
   include:
@@ -30,12 +30,12 @@ matrix:
 
 before_install:
   - export TRAVIS_COMMIT_MSG="$(git log --format=%B --no-merges -n 1)"
-  - echo "$TRAVIS_COMMIT_MSG" | grep '[argh]'; export BUILD_ARGH=$?; true
-  - echo "$TRAVIS_COMMIT_MSG" | grep '[pathtools]'; export BUILD_PATHTOOLS=$?; true
-  - echo "$TRAVIS_COMMIT_MSG" | grep '[watchdog]'; export BUILD_WATCHDOG=$?; true
-  - echo "$TRAVIS_COMMIT_MSG" | grep '[atom]'; export BUILD_ATOM=$?; true
-  - echo "$TRAVIS_COMMIT_MSG" | grep '[kiwisolver]'; export BUILD_KIWISOLVER=$?; true
-  - echo "$TRAVIS_COMMIT_MSG" | grep '[enaml]'; export BUILD_ENAML=$?; true
+  - echo "$TRAVIS_COMMIT_MSG" | grep '\[argh\]'; export BUILD_ARGH=$?; true
+  - echo "$TRAVIS_COMMIT_MSG" | grep '\[pathtools\]'; export BUILD_PATHTOOLS=$?; true
+  - echo "$TRAVIS_COMMIT_MSG" | grep '\[watchdog\]'; export BUILD_WATCHDOG=$?; true
+  - echo "$TRAVIS_COMMIT_MSG" | grep '\[atom\]'; export BUILD_ATOM=$?; true
+  - echo "$TRAVIS_COMMIT_MSG" | grep '\[kiwisolver\]'; export BUILD_KIWISOLVER=$?; true
+  - echo "$TRAVIS_COMMIT_MSG" | grep '\[enaml\]'; export BUILD_ENAML=$?; true
 
 install:
   - source continuous-integration/travis/install.sh
