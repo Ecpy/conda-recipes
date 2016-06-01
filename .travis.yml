@@ -48,7 +48,7 @@ install:
   - cd conda-bld-out
   - export CONDA_BLD_PATH=$(pwd)
   - cd ..
-  - if [[ $DISBALE_TRAVIS != 0 ]]; then conda config --add channels ecpy; fi
+  - if [[ $DISABLE_TRAVIS != 0 ]]; then conda config --add channels ecpy; fi
 
 script:
   - bash continuous-integration/travis/build-packages.sh
