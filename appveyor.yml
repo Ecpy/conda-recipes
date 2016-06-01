@@ -65,7 +65,7 @@ install:
 build: false
 
 test_script:
-  - cmd .\\continuous-integration\\appveyor\\build-packages.bat
+  - "%CMD_IN_ENV% .\\continuous-integration\\appveyor\\build-packages.bat"
 
 artifacts:
   # Archive the generated conda package in the ci.appveyor.com build report.

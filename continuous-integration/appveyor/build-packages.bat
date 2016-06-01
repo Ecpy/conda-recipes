@@ -7,18 +7,18 @@ REM register them as "artifacts" for Appveyor. cmd.exe does't have good
 REM globbing, so we'll use a simple python script.
 
 if %BUILD_ATOM%==0 (
-  %CMD_IN_ENV% conda build .\\conda-recipes\\atom --quiet'
+  conda build .\\conda-recipes\\atom --quiet'
   conda index %CONDA_BLD_PATH%\win-%PYTHON_ARCH%'
   python continuous-integration\move-conda-packages.py conda-recipes\atom'
 )
 
 if %BUILD_KIWISOLVER%==0 (
-  %CMD_IN_ENV% conda build .\\conda-recipes\\kiwisolver --quiet
+  conda build .\\conda-recipes\\kiwisolver --quiet
   conda index %CONDA_BLD_PATH%\win-%PYTHON_ARCH%
   python continuous-integration\move-conda-packages.py conda-recipes\kiwisolver
 )
 
 if %BUILD_ENAML%==0 (
-  %CMD_IN_ENV% conda build .\\conda-recipes\\enaml --quiet -c file://%CONDA_BLD_PATH%
+  conda build .\\conda-recipes\\enaml --quiet -c file://%CONDA_BLD_PATH%
   python continuous-integration\move-conda-packages.py conda-recipes\enaml
 )
