@@ -65,11 +65,13 @@ install:
 build: false
 
 test_script:
-  - "%CMD_IN_ENV% .\\continuous-integration\\appveyor\\build-packages.bat"
+  - "%CMD_IN_ENV% .\\continuous-integration\\appveyor\\build-atom.bat"
+  - "%CMD_IN_ENV% .\\continuous-integration\\appveyor\\build-kiwisolver.bat"
+  - "%CMD_IN_ENV% .\\continuous-integration\\appveyor\\build-enaml.bat"
 
 artifacts:
   # Archive the generated conda package in the ci.appveyor.com build report.
-  - path: '*.tar.bz2'
+  - path: %CONDA_BLD_PATH%\'*.tar.bz2'
 
 on_success:
   # Upload built binaries to anaconda.org. The globbing and handling of the
@@ -77,5 +79,5 @@ on_success:
   # a python script.
   - cd %CONDA_BLD_PATH%
   - if defined ANACONDA_TOKEN (
-      python continuous-integration\anaconda-push.py
+      python ..\continuous-integration\anaconda-push.py
     )
