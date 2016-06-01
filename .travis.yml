@@ -50,4 +50,4 @@ script:
 
 after_success:
   - cd conda-bld-out
-  - if [ TRAVIS_SECURE_ENV_VARS ]; then anaconda upload -t $ANACONDA_TOKEN upload --force *.tar.bz2; fi
+  - if [ TRAVIS_SECURE_ENV_VARS ]; then python continuous-integration/anaconda-push.py; fi
