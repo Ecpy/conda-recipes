@@ -75,6 +75,7 @@ on_success:
   # Upload built binaries to anaconda.org. The globbing and handling of the
   # exit-status code is tricky in cmd.exe or powershell, so we're just using
   # a python script.
-   - if defined ANACONDA_TOKEN (
-     python continuous-integration\anaconda-push.py
-     )
+  - cd %CONDA_BLD_PATH%
+  - if defined ANACONDA_TOKEN (
+      python continuous-integration\anaconda-push.py
+    )
