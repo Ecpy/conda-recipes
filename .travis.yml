@@ -31,6 +31,7 @@ matrix:
 before_install:
   - export TRAVIS_COMMIT_MSG="$(git log --format=%B --no-merges -n 1)"
   - echo $TRAVIS_COMMIT_MSG
+  - echo "$TRAVIS_COMMIT_MSG" | grep '\[skip travis\]'; export DISABLE_TRAVIS=$?; true
   - echo "$TRAVIS_COMMIT_MSG" | grep '\[argh\]'; export BUILD_ARGH=$?; true
   - echo "$TRAVIS_COMMIT_MSG" | grep '\[pathtools\]'; export BUILD_PATHTOOLS=$?; true
   - echo "$TRAVIS_COMMIT_MSG" | grep '\[watchdog\]'; export BUILD_WATCHDOG=$?; true
@@ -42,16 +43,16 @@ before_install:
 
 
 install:
-  - source continuous-integration/travis/install.sh
+  - if [[ $DISBALE_TRAVIS != 0 ]]; then bash continuous-integration/travis/install.sh; fi
   - mkdir conda-bld-out
   - cd conda-bld-out
   - export CONDA_BLD_PATH=$(pwd)
   - cd ..
-  - conda config --add channels ecpy
+  - if [[ $DISBALE_TRAVIS != 0 ]]; then conda config --add channels ecpy; fi
 
 script:
-  - source continuous-integration/travis/build-packages.sh
+  - bash continuous-integration/travis/build-packages.sh
 
 after_success:
   - cd conda-bld-out
-  - if [ TRAVIS_SECURE_ENV_VARS ]; then python ../continuous-integration/anaconda-push.py; fi
+  - if [[ $DISBALE_TRAVIS != 0 ]] & [[ $TRAVIS_SECURE_ENV_VARS ]]; then python ../continuous-integration/anaconda-push.py; fi
