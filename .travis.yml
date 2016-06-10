@@ -43,7 +43,7 @@ before_install:
 
 
 install:
-  - if [[ $DISBALE_TRAVIS != 0 ]]; then bash continuous-integration/travis/install.sh; fi
+  - if [[ $DISABLE_TRAVIS != 0 ]]; then source continuous-integration/travis/install.sh; fi
   - mkdir conda-bld-out
   - cd conda-bld-out
   - export CONDA_BLD_PATH=$(pwd)
