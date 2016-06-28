@@ -48,7 +48,7 @@ install:
   # as well as pip, conda-build, and the anaconda CLI
   - powershell .\\continuous-integration\\appveyor\\install.ps1
   - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
-  - conda install conda-build==1.2.3
+  - conda install conda-build==1.20.3
 
   # Determine which packages to build
   # Use cd as true on bash to set the status to 0
