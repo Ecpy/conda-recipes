@@ -1,0 +1,25 @@
+package:
+  name: enaml-pygments
+  version: {{ environ.get('GIT_DESCRIBE_TAG') }}.post{{ environ.get('GIT_DESCRIBE_NUMBER') }}
+
+source:
+  git_url: https://github.com/MatthieuDartiailh/enaml.git
+  git_tag: python3-parsing
+
+build:
+  number: {{ environ.get('GIT_DESCRIBE_NUMBER', 1) }}
+  preserve_egg_dir: True
+  noarch_python: True
+
+requirements:
+  build:
+    - python
+  run:
+    - python
+    - pygments
+
+about:
+  home: https://github.com/nucleic/enaml
+  license: BSD
+  license_file: COPYING.txt
+  summary: Declarative DSL for building rich user interfaces in Python

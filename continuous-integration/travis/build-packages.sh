@@ -12,6 +12,12 @@ if [[ $DISABLE_TRAVIS != 0 ]]; then
     conda index $CONDA_BLD_PATH/$TRAVIS_OS_NAME-64
   fi
 
+  if [[ $BUILD_ENAML_PYGMENTS == 0 ]]; then
+    conda build conda-recipes/enaml-pygments --quiet
+    export BUILD_ENAML_PYGMENTS=$?
+    conda index $CONDA_BLD_PATH/$TRAVIS_OS_NAME-64
+  fi
+
   if [[ $BUILD_WATCHDOG == 0 ]]; then
     conda build conda-recipes/watchdog --quiet -c file://$CONDA_BLD_PATH
     export BUILD_WATCHDOG=$?

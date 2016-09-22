@@ -19,6 +19,7 @@ Universal packages are built only on Travis. The universal packages are :
 
 - argh
 - pathtools
+- enaml-pygments
 
 Watchdog has compiled extension only on mac so we do not build under windows
 
