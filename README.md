@@ -23,6 +23,8 @@ Universal packages are built only on Travis. The universal packages are :
 
 Watchdog has compiled extension only on mac so we do not build under windows
 
+On windows enaml package can be built only if atom and kiwisolver have already 
+been updated to Anaconda Cloud.
 
 Updating the credentials
 ------------------------
