@@ -1,9 +1,9 @@
 package:
   name: pyclibrary
-  ersion: {{ environ.get('GIT_DESCRIBE_TAG') }}.post{{ environ.get('GIT_DESCRIBE_NUMBER') }}
+  version: {{ environ.get('GIT_DESCRIBE_TAG') }}.post{{ environ.get('GIT_DESCRIBE_NUMBER') }}
 
 source:
-  git_rev: master
+  git_tag: master
   git_url: https://github.com/MatthieuDartiailh/pyclibrary
 
 build:
@@ -17,11 +17,12 @@ requirements:
 
   run:
     - python
+    - future
 
 test:
   # Python imports
   imports:
-    - argh
+    - pyclibrary
 
 about:
   home: http://github.com/MatthieuDartiailh/pyclibrary/
