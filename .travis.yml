@@ -34,12 +34,14 @@ before_install:
   - echo "$TRAVIS_COMMIT_MSG" | grep '\[skip travis\]'; export DISABLE_TRAVIS=$?; true
   - echo "$TRAVIS_COMMIT_MSG" | grep '\[enaml-pygments\]'; export BUILD_ENAML_PYGMENTS=$?; true
   - echo "$TRAVIS_COMMIT_MSG" | grep '\[argh\]'; export BUILD_ARGH=$?; true
+  - echo "$TRAVIS_COMMIT_MSG" | grep '\[pyclibrary\]'; export BUILD_PYCLIBRARY=$?; true
   - echo "$TRAVIS_COMMIT_MSG" | grep '\[pathtools\]'; export BUILD_PATHTOOLS=$?; true
   - echo "$TRAVIS_COMMIT_MSG" | grep '\[watchdog\]'; export BUILD_WATCHDOG=$?; true
   - echo "$TRAVIS_COMMIT_MSG" | grep '\[atom\]'; export BUILD_ATOM=$?; true
   - echo "$TRAVIS_COMMIT_MSG" | grep '\[kiwisolver\]'; export BUILD_KIWISOLVER=$?; true
   - echo "$TRAVIS_COMMIT_MSG" | grep '\[enaml\]'; export BUILD_ENAML=$?; true
   - echo "argh" $BUILD_ARGH "pathtools" $BUILD_PATHTOOLS "watchdog" $BUILD_WATCHDOG
+  - echo "enaml-pygments" $BUILD_ENAML_PYGMENTS "pyclibrary" BUILD_PYCLIBRARY
   - echo "atom" $BUILD_ATOM "kiwi" $BUILD_KIWISOLVER "enaml" $BUILD_ENAML
 
 

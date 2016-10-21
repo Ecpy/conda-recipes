@@ -1,0 +1,33 @@
+package:
+  name: pyclibrary
+  ersion: {{ environ.get('GIT_DESCRIBE_TAG') }}.post{{ environ.get('GIT_DESCRIBE_NUMBER') }}
+
+source:
+  git_rev: master
+  git_url: https://github.com/MatthieuDartiailh/pyclibrary
+
+build:
+  noarch_python: True
+
+requirements:
+  build:
+    - python
+    - setuptools
+    - future
+
+  run:
+    - python
+
+test:
+  # Python imports
+  imports:
+    - argh
+
+about:
+  home: http://github.com/MatthieuDartiailh/pyclibrary/
+  license: Modified BSD
+  summary: 'Automatized DLL wrapping library.'
+
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml
