@@ -10,5 +10,5 @@ bash $MINICONDA_FILE -b -p ~/miniconda
 
 export PATH=~/miniconda/bin:$PATH
 
-conda install --yes conda=4.2.9
 conda install --yes pip conda-build jinja2 anaconda-client
+conda install --yes conda=4.2.9
