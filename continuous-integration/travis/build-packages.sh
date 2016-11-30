@@ -3,24 +3,32 @@ if [[ $DISABLE_TRAVIS != 0 ]]; then
   if [[ $BUILD_ARGH == 0 ]]; then
     conda build conda-recipes/argh --quiet
     export BUILD_ARGH=$?
+    export PACK="$(conda build conda --output)"
+    conda convert $PACK -p 'all' --quiet -o $CONDA_BLD_PATH
     conda index $CONDA_BLD_PATH/$TRAVIS_OS_NAME-64
   fi
 
   if [[ $BUILD_PATHTOOLS == 0 ]]; then
     conda build conda-recipes/pathtools --quiet
     export BUILD_PATHTOOLS=$?
+    export PACK="$(conda build conda --output)"
+    conda convert $PACK -p 'all' --quiet -o $CONDA_BLD_PATH
     conda index $CONDA_BLD_PATH/$TRAVIS_OS_NAME-64
   fi
 
   if [[ $BUILD_ENAML_PYGMENTS == 0 ]]; then
     conda build conda-recipes/enaml-pygments --quiet
     export BUILD_ENAML_PYGMENTS=$?
+    export PACK="$(conda build conda --output)"
+    conda convert $PACK -p 'all' --quiet -o $CONDA_BLD_PATH
     conda index $CONDA_BLD_PATH/$TRAVIS_OS_NAME-64
   fi
-  
+
   if [[ $BUILD_PYCLIBRARY == 0 ]]; then
     conda build conda-recipes/pyclibrary --quiet
     export BUILD_PYCLIBRARY=$?
+    export PACK="$(conda build conda --output)"
+    conda convert $PACK -p 'all' --quiet -o $CONDA_BLD_PATH
     conda index $CONDA_BLD_PATH/$TRAVIS_OS_NAME-64
   fi
 

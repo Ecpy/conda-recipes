@@ -9,7 +9,6 @@ source:
 build:
   number: {{ environ.get('GIT_DESCRIBE_NUMBER', 1) }}
   preserve_egg_dir: True
-  noarch_python: True
 
 requirements:
   build:
