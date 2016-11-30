@@ -31,6 +31,13 @@ if [[ $DISABLE_TRAVIS != 0 ]]; then
     conda convert $PACK -p 'all' --quiet -o $CONDA_BLD_PATH
     conda index $CONDA_BLD_PATH/$TRAVIS_OS_NAME-64
   fi
+  
+  if [[ $BUILD_PYVISA == 0 ]]; then
+    conda build conda-recipes/pyvisa --quiet
+    export BUILD_PYVISA=$?
+    export PACK="$(conda build conda --output)"
+    conda convert $PACK -p 'all' --quiet -o $CONDA_BLD_PATH
+  fi
 
   if [[ $BUILD_WATCHDOG == 0 ]]; then
     conda build conda-recipes/watchdog --quiet -c file://$CONDA_BLD_PATH

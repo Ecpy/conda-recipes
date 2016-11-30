@@ -37,6 +37,7 @@ before_install:
   - echo "$TRAVIS_COMMIT_MSG" | grep '\[pyclibrary\]'; export BUILD_PYCLIBRARY=$?; true
   - echo "$TRAVIS_COMMIT_MSG" | grep '\[pathtools\]'; export BUILD_PATHTOOLS=$?; true
   - echo "$TRAVIS_COMMIT_MSG" | grep '\[watchdog\]'; export BUILD_WATCHDOG=$?; true
+  - echo "$TRAVIS_COMMIT_MSG" | grep '\[pyvisa\]'; export BUILD_PYVISA=$?; true
   - echo "$TRAVIS_COMMIT_MSG" | grep '\[atom\]'; export BUILD_ATOM=$?; true
   - echo "$TRAVIS_COMMIT_MSG" | grep '\[kiwisolver\]'; export BUILD_KIWISOLVER=$?; true
   - echo "$TRAVIS_COMMIT_MSG" | grep '\[enaml\]'; export BUILD_ENAML=$?; true
