@@ -24,10 +24,9 @@ test:
     - pyvisa
 
 about:
-# XXX complete
   home: http://github.com/hgrecco/pyvisa/
-  license: Modified BSD
-  summary: 'Automatized DLL wrapping library.'
+  license: 'MIT License'
+  summary: 'Python VISA bindings for GPIB, RS232, and USB instruments'
 
 # See
 # http://docs.continuum.io/conda/build.html for

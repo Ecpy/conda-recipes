@@ -24,7 +24,7 @@ test:
 about:
   home: http://github.com/MatthieuDartiailh/pyclibrary/
   license: Modified BSD
-  summary: 'Automatized DLL wrapping library.'
+  summary: 'Automatized DLL wrapping library'
 
 # See
 # http://docs.continuum.io/conda/build.html for
