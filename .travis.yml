@@ -54,6 +54,7 @@ before_install:
 
 
 install:
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then rvm get stable; fi
   - if [[ $DISABLE_TRAVIS != 0 ]]; then source continuous-integration/travis/install.sh; fi
   - mkdir conda-bld-out
   - cd conda-bld-out
