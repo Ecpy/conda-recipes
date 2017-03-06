@@ -16,7 +16,7 @@ requirements:
 
   run:
     - python
-    - enum34 # [not (py34 or py35)]
+    - enum34 # [not (py34 or py35 or py36)]
 
 test:
   # Python imports
