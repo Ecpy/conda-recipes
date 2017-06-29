@@ -13,7 +13,7 @@ build:
   skip_compile_pyc:
     - enaml/core/byteplay/*.py
   has_prefix_files:
-    - /*.enamlc
+    - enaml/stdlib/__enamlcache__/*.enamlc
 
 requirements:
   build:
