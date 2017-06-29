@@ -12,8 +12,6 @@ build:
   osx_is_app: True
   skip_compile_pyc:
     - enaml/core/byteplay/*.py
-  has_prefix_files:
-    - enaml/stdlib/__enamlcache__/*.enamlc
 
 requirements:
   build:
