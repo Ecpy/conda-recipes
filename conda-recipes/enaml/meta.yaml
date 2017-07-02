@@ -11,9 +11,10 @@ build:
     - enaml-run = enaml.runner:main
   osx_is_app: True
   skip_compile_pyc:
-    - enaml/core/byteplay/*.py
+    - Lib/site-packages/enaml/core/byteplay/*.py
   ignore_prefix_files:
-    - /*.enamlc
+    - Lib/site-packages/enaml/*/__enamlcache__/*.*.enamlc
+    - Lib/site-packages/enaml/*/*/__enamlcache__/*.*.enamlc
 
 requirements:
   build:
