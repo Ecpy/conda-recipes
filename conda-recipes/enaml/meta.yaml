@@ -1,6 +1,10 @@
 package:
   name: enaml
-  version: {{ environ.get('GIT_DESCRIBE_TAG') }}.post{{ environ.get('GIT_DESCRIBE_NUMBER') }}
+  version: {{ environ.get('GIT_DESCRIBE_TAG', '') +
+             ( '' if environ.get('GIT_DESCRIBE_NUMBER', '0')  == '0' else
+              ('.post' + environ.get('GIT_DESCRIBE_NUMBER', '0' )
+               )
+              )}}
 source:
   git_tag: dev
   git_url: https://github.com/MatthieuDartiailh/enaml.git
@@ -11,10 +15,9 @@ build:
     - enaml-run = enaml.runner:main
   osx_is_app: True
   skip_compile_pyc:
-    - Lib/site-packages/enaml/core/byteplay/*.py
+    - "*/enaml/core/byteplay/*.py"
   ignore_prefix_files:
-    - Lib/site-packages/enaml/*/__enamlcache__/*.*.enamlc
-    - Lib/site-packages/enaml/*/*/__enamlcache__/*.*.enamlc
+    - "**/enaml/**/__enamlcache__/*.*.enamlc"
 
 requirements:
   build:
