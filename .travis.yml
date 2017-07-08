@@ -9,31 +9,31 @@ matrix:
     - os: linux
       dist: trusty
       sudo: false
-      env: python=2.7 CONDA_PY=27
+      env: python=2.7 CONDA_PY=2.7
     - os: linux
       dist: trusty
       sudo: false
-      env: python=3.4 CONDA_PY=34
+      env: python=3.4 CONDA_PY=3.4
     - os: linux
       dist: trusty
       sudo: false
-      env: python=3.5 CONDA_PY=35
+      env: python=3.5 CONDA_PY=3.5
     - os: linux
       dist: trusty
       sudo: false
-      env: python=3.6 CONDA_PY=36
+      env: python=3.6 CONDA_PY=3.6
     - os: osx
       osx_image: xcode7.3
-      env: CONDA_PY=27
+      env: CONDA_PY=2.7
     - os: osx
       osx_image: xcode7.3
-      env: CONDA_PY=34
+      env: CONDA_PY=3.4
     - os: osx
       osx_image: xcode7.3
-      env: CONDA_PY=35
+      env: CONDA_PY=3.5
     - os: osx
       osx_image: xcode7.3
-      env: CONDA_PY=36
+      env: CONDA_PY=3.6
 
 before_install:
   - export TRAVIS_COMMIT_MSG="$(git log --format=%B --no-merges -n 1)"
