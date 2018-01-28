@@ -1,9 +1,5 @@
 language: generic
 
-env:
-  global:
-    secure: "eEqhuLsrcqj3A0ydCpJz4fH1fhwLkuTNmGWUlSTfkba2YTmZSeCJ4q006vKmFo3dUMTyI2m59YnSU7qvjov3/kX2T/Ys86sH4q/DRV19smNcbQwNm2YGbE9aKTfKSthoAJ/+hsB3mkio6oZRnAy+nxs8IA35XysqlqtIH6yLNkwBVNbL0kcFbJQ9WiZn0g5vja1O9KT81jOaI1mBwSAlx+50t9StUwUhOKk7paRJs2TF8KkcpHZGozKi4/+jurvuLYyJoZ2wGLYRYuHYu6Cm1pc5hpEAMFk8TjrqGMdJ0oKkDH6k/rAgB6AiBGeNb3FnvGi8U15t/X4yvtLCY7APezWbxT9mlta8KPNPg4PLyl34wUtTZSwj6bKuw4lYt8P/ItKcm0amcT3+LxVKU5zL4KBCtNF+g/RIop+6j+f6HUF4FGdpzS6ZE5GZrS9SQ00XC4THYZAUGsBbylTWoTnlFGB9ZFrgyTEdAlDkJOHCQMPXp1/TIocpuNbdwbqDI4BXn3LO4RmOWdtNbcf4AUZNqUG7IlRvc8Gimu+j8bpMVjGdJsC+5EL4uawkWGoMSmh0Pfwbei0OvNz9CbZaM59PonAxIPuXvxKIIBo5I2tu7m6f31UGWRg61VSRmWR+pYZiJmpIKsxXTkLUllUPOi55aE+JKwt8f1uCAg5j+5qCd2k="
-
 matrix:
   include:
     - os: linux
