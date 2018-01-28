@@ -31,7 +31,7 @@ requirements:
     - python.app       [osx]
     - atom >=0.4.0
     - pyqt
-    - qtpy >= 1.3
+    - qtpy >=1.3
     - kiwisolver >=1.0.0
     - ply
     - future
