@@ -7,7 +7,7 @@ package:
               )}}
 
 source:
-  git_tag: dev
+  git_tag: master
   git_url: https://github.com/nucleic/kiwi
 
 build:
