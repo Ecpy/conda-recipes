@@ -2,10 +2,10 @@ Ecpy dependencies packages
 ==========================
 
 This repository is used to automatically build conda packages for all Ecpy
-dependecies for which a conda package does not exist in the main conda channel.
+dependencies for which a conda package does not exist in the main conda channel.
 
 Each time a commit is pushed to this repo, the commit message is analysed and
-all packages mentionned between [] in the commit message are rebuilt and
+all packages mentioned between [] in the commit message are rebuilt and
 uploaded to the ecpy anaconda channel.
 
 Appveyor build can be skipped using [skip appveyor]
