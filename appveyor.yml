@@ -61,7 +61,7 @@ install:
   - cd conda-bld-out
   - set CONDA_BLD_PATH=%cd%
   - cd ..
-  - conda config --add channels ecpy
+  - conda config --add channels exopy
 
 build: false
 
