@@ -5,18 +5,11 @@ matrix:
     - os: linux
       dist: trusty
       sudo: false
-      env: python=2.7 CONDA_PY=2.7
-    - os: linux
-      dist: trusty
-      sudo: false
       env: python=3.5 CONDA_PY=3.5
     - os: linux
       dist: trusty
       sudo: false
       env: python=3.6 CONDA_PY=3.6
-    - os: osx
-      osx_image: xcode7.3
-      env: CONDA_PY=2.7
     - os: osx
       osx_image: xcode7.3
       env: CONDA_PY=3.5
