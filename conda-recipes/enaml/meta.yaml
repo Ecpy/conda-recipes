@@ -22,7 +22,7 @@ build:
 requirements:
   build:
     - python
-    - atom >=0.4.1
+    - atom >=0.4.2
     - kiwisolver >=1.0.0
     - ply
     - future
