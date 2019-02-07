@@ -15,8 +15,7 @@ requirements:
     - setuptools
 
   run:
-    - python
-    - enum34 # [not (py34 or py35 or py36)]
+    - python >=3.5
 
 test:
   # Python imports

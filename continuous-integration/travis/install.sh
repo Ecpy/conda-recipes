@@ -16,4 +16,5 @@ bash $MINICONDA_FILE -b -p ~/miniconda
 
 export PATH=~/miniconda/bin:$PATH
 
-conda install --yes pip conda-build jinja2 anaconda-client
+conda update --yes conda
+conda install --yes pip conda-build jinja2 anaconda-client conda-verify
