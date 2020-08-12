@@ -4,7 +4,7 @@ package:
 
 source:
   git_tag: 1.10.1
-  git_url: https://github.com/hgrecco/pyvisa
+  git_url: https://github.com/pyvisa/pyvisa
 
 build:
   number: {{ environ.get('GIT_DESCRIBE_NUMBER', 1) }}
