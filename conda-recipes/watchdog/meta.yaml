@@ -1,11 +1,11 @@
 package:
   name: watchdog
-  version: "0.8.3"
+  version: "0.10.3"
 
 source:
-  fn: watchdog-0.8.3.tar.gz
-  url: https://pypi.python.org/packages/source/w/watchdog/watchdog-0.8.3.tar.gz
-  md5: bb16926bccc98eae2a04535e4512ddf1
+  fn: watchdog-0.10.3.tar.gz
+  url: https://pypi.python.org/packages/source/w/watchdog/watchdog-0.10.3.tar.gz
+  md5: 9a5c9134e943b534b9f8b51d78338cf8
 
 build:
   # preserve_egg_dir: True
